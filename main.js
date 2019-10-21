@@ -43,7 +43,7 @@ var randomWord = mlbTeams[randomIndex];
 
 //Pass randomWord through Word constructor
 
-var computerWord = new Word(randomWord)
+var comWord = new Word(randomWord)
 
 var requireNewWord = false;
 
@@ -54,7 +54,7 @@ var correctLetters = [];
 
 // Set number for number of guess left
 
-var guessesLeft = 10;
+var guessesLeft = 8;
 
 function wordGenerator (){
 
@@ -62,41 +62,41 @@ function wordGenerator (){
         var randomIndex = Math.floor(Math.random() * mlbTeams.length);
         var randomWord = mlbTeams[randomIndex];
 
-        computerWord = new Word(randomWord)
+        comWord = new Word(randomWord)
 
         requireNewWord = false;
     }
 
         var wordComplete = [];
-        computerWord.objArray.forEach(completeCheck);
+        comWord.objArray.forEach(completeCheck);
         if(wordComplete.includes(false)){
             inquirer.prompt([
                     {
                         type: "input",
                         message: "Guess a letter between A-Z that you think is in the word. To figure out what MLB team it is.",
-                        name: "userInput"
+                        name: "userGuess"
                     }
                 ]).then(function(input){
-                    if(!letterArray.includes(input.userInput) || input.userInput.length > 1){
+                    if(!letterArray.includes(input.userGuess) || input.userGuess.length > 1){
                         console.log('\nPlease Try again!!!\n')
                         wordGenerator()
                     }else{
-                        if(incorrectLetters.includes(input.userInput) || correctLetters.includes(input.userInput) || input.userInput === ""){
+                        if(incorrectLetters.includes(input.userGuess) || correctLetters.includes(input.userGuess) || input.userGuess === ""){
                             console.log('\nLetter already Guessed or no letter put in\n');
                             wordGenerator();
                         }else{
                             var wordCheckArray = [];
-                            computerWord.userGuess(input.userInput);
-                            computerWord.objArray.forEach(wordCheck);
+                            comWord.userGuess(input.userGuess);
+                            comWord.objArray.forEach(wordCheck);
                             if(wordCheckArray.join("") === wordComplete.join("")){
                                 console.log("\nIncorrect\n");
-                                incorrectLetters.push(input.userInput);
+                                incorrectLetters.push(input.userGuess);
                                 guessesLeft --;
                             }else{
                                 console.log("\nCorrect\n");
-                                correctLetters.push(input.userInput);
+                                correctLetters.push(input.userGuess);
                             }
-                            computerWord.log();
+                            comWord.log();
                             console.log(`\nGuesses left ${guessesLeft}\n`)
                             console.log(`\nLetters guessed ${incorrectLetters.join(" ")}\n`);
                             if(guessesLeft > 0){
@@ -133,7 +133,7 @@ function restartGame(){
             requireNewWord = true;
             incorrectLetters = [];
             correctLetters = [];
-            guessesLeft = 10;
+            guessesLeft = 8;
             wordGenerator();
         }else{
             return;

@@ -1,5 +1,5 @@
-function Letter(value){
-    this.letter = value;
+function Letter(letter){
+    this.letter = letter;
     this.guessed = false;
 
     this.toString = function(){
