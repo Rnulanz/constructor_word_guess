@@ -1,28 +1,28 @@
-const Letter = require('./letter');
+var Letter = require('./letter.js');
 
 function Word(answer){
-    this.newArr = [];
+    this.objArray = [];
 
     for(var i = 0; i < answer.length; i++){
         var letter = new Letter(answer[i]);
-            this.newArr.push(letter);
+            this.objArray.push(letter);
     }
 
     this.log = function(){
-        answerInput = "";
+        answerLog = "";
         
-        for(var i =0; i < this.newArr.length; i++){
-            answerInput += this.newArr[i] + " ";
+        for(var i = 0; i < this.objArray.length; i++){
+            answerLog += this.objArray[i] + " ";
         }
 
-    console.log(answerInput + "\n======================================\n");
+    console.log(answerLog + "\n======================================\n");
     };
-    this.useGuess = function(input){
-        for (var i =0; i < this.newArr.length; i++ ){
-            this.newArr[i].guess(input);
+    this.userGuess = function(input){
+        for (var i = 0; i < this.objArray.length; i++ ){
+            this.objArray[i].guess(input);
         }
     
-    }
+    };
 }
 
 module.exports = Word;

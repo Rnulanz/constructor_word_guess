@@ -4,7 +4,7 @@ function Letter(value){
 
     this.toString = function(){
         if(this.letter === " "){
-            this.letter =true;
+            this.guessed =true;
             return " ";
         }else{
             if(this.guessed === false){
@@ -14,11 +14,11 @@ function Letter(value){
             }
         }
     };
-    this.playerGuess = function(guess){
+    this.guess = function(guess){
         if(guess === this.letter){
-            this.guess = true;
+            this.guessed = true;
         }
-    }
+    };
 }
 
 module.exports = Letter
