@@ -49,8 +49,8 @@ var requireNewWord = false;
 
 
 //Array for letters guessed
-var incorrectLetters = [];
-var correctLetters = [];
+var incorrectGuess = [];
+var correctGuess = [];
 
 // Set number for number of guess left
 
@@ -81,7 +81,7 @@ function wordGenerator (){
                         console.log('\nPlease Try again!!!\n')
                         wordGenerator()
                     }else{
-                        if(incorrectLetters.includes(input.userGuess) || correctLetters.includes(input.userGuess) || input.userGuess === ""){
+                        if(incorrectGuess.includes(input.userGuess) || correctGuess.includes(input.userGuess) || input.userGuess === ""){
                             console.log('\nLetter already Guessed or no letter put in\n');
                             wordGenerator();
                         }else{
@@ -90,15 +90,15 @@ function wordGenerator (){
                             comWord.objArray.forEach(wordCheck);
                             if(wordCheckArray.join("") === wordComplete.join("")){
                                 console.log("\nIncorrect\n");
-                                incorrectLetters.push(input.userGuess);
+                                incorrectGuess.push(input.userGuess);
                                 guessesLeft --;
                             }else{
                                 console.log("\nCorrect\n");
-                                correctLetters.push(input.userGuess);
+                                correctGuess.push(input.userGuess);
                             }
                             comWord.log();
                             console.log(`\nGuesses left ${guessesLeft}\n`)
-                            console.log(`\nLetters guessed ${incorrectLetters.join(" ")}\n`);
+                            console.log(`\nLetters guessed ${incorrectGuess.join(" ")}\n`);
                             if(guessesLeft > 0){
                                 wordGenerator();                           
                             }else{
@@ -131,8 +131,8 @@ function restartGame(){
     ]).then(function(input){
         if(input.restart === 'Play Again'){
             requireNewWord = true;
-            incorrectLetters = [];
-            correctLetters = [];
+            incorrectGuess = [];
+            correctGuess = [];
             guessesLeft = 8;
             wordGenerator();
         }else{
